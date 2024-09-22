@@ -3,35 +3,35 @@ name: CI
 on:
   push:
     branches:
-      - main  # or your preferred branch
+      - main  # Trigger on pushes to the main branch
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Set up JDK 17
-      uses: actions/setup-java@v2
-      with:
-        java-version: '17'
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
 
-    - name: Build with Maven
-      run: mvn clean package
+      - name: Build with Maven
+        run: mvn clean package
 
-    - name: Log in to Docker Hub
-      run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
-    - name: Build Docker image
-      run: |
-        IMAGE_NAME="samarth0157/spring-app"
-        IMAGE_TAG="v$(date +%Y%m%d%H%M%S)"  # Tag with current timestamp
-        docker build -t $IMAGE_NAME:$IMAGE_TAG .
+      - name: Build Docker image
+        run: |
+          IMAGE_NAME="samarth0157/spring-app"
+          IMAGE_TAG="v$(date +%Y%m%d%H%M%S)"  # Tag with current timestamp
+          docker build -t $IMAGE_NAME:$IMAGE_TAG .
 
-    - name: Push Docker image
-      run: |
-        IMAGE_NAME="samarth0157/spring-app"
-        IMAGE_TAG="v$(date +%Y%m%d%H%M%S)"
-        docker push $IMAGE_NAME:$IMAGE_TAG
+      - name: Push Docker image
+        run: |
+          IMAGE_NAME="samarth0157/spring-app"
+          IMAGE_TAG="v$(date +%Y%m%d%H%M%S)"
+          docker push $IMAGE_NAME:$IMAGE_TAG
