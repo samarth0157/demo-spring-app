@@ -17,7 +17,6 @@ jobs:
       uses: actions/setup-java@v2
       with:
         java-version: '17'
-        distribution: 'temurin'
 
     - name: Build with Maven
       run: mvn clean package
@@ -27,15 +26,15 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        
+
     - name: Build Docker image
       run: |
-        IMAGE_NAME="${{ secrets.DOCKER_IMAGE_NAME }}"  # Use secret for image name
+        IMAGE_NAME="samarth0157/spring-app"
         IMAGE_TAG="v$(date +%Y%m%d%H%M%S)"  # Tag with current timestamp
         docker build -t $IMAGE_NAME:$IMAGE_TAG .
 
     - name: Push Docker image
       run: |
-        IMAGE_NAME="${{ secrets.DOCKER_IMAGE_NAME }}"
+        IMAGE_NAME="samarth0157/spring-app"
         IMAGE_TAG="v$(date +%Y%m%d%H%M%S)"
         docker push $IMAGE_NAME:$IMAGE_TAG
