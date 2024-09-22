@@ -3,7 +3,7 @@ name: CI
 on:
   push:
     branches:
-      - main  # or your preferred branch
+      - main  # or your preferred branch tst
 
 jobs:
   build:
@@ -39,3 +39,5 @@ jobs:
         IMAGE_NAME="sam0157/spring-app"
         IMAGE_TAG="v$(date +%Y%m%d%H%M%S)"
         docker push $IMAGE_NAME:$IMAGE_TAG
+
+      
