@@ -19,6 +19,6 @@ public class RandomNumberController {
     // Endpoint to return "Hello, World!"
     @GetMapping("/hello")
     public String greet() {
-        return "Hello, World! new app on github v1  ";
+        return "Hello, World! new app on github happy  ";
     }
 }
