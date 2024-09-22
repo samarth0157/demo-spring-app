@@ -33,11 +33,6 @@ jobs:
         IMAGE_NAME="sam0157/spring-app"
         IMAGE_TAG="v$(date +%Y%m%d%H%M%S)"  # Tag with current timestamp
         docker build -t $IMAGE_NAME:$IMAGE_TAG .
-
-    - name: Push Docker image
-      run: |
-        IMAGE_NAME="sam0157/spring-app"
-        IMAGE_TAG="v$(date +%Y%m%d%H%M%S)"
         docker push $IMAGE_NAME:$IMAGE_TAG
 
       
