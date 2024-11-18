@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo-app
+  template:
+    metadata:
+      labels:
+        app: demo-app
+    spec:
+      containers:
+      - name: demo-spring-app
+        image: sam0157/pricing-appv1:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: SPRING_DATASOURCE_URL
+          value: "jdbc:postgresql://postgres-service.default.svc.cluster.local:5432/demo"
+        - name: SPRING_DATASOURCE_USERNAME
+          value: "yourusername"
+        - name: SPRING_DATASOURCE_PASSWORD
+          value: "yourpassword"
